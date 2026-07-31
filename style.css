@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 40px 20px;
+}
+
+.curriculo {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.cabeçalho {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 30px 20px;
+}
+
+.cabeçalho h1 {
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+.cabeçalho h2 {
+    font-size: 1.5em;
+    color: #9ec9ec;
+    margin-bottom: 18px;
+}
+
+.cabeçalho p {
+    margin-top: 10px;
+    line-height: 1.6;
+}
+
+section {
+    margin-bottom: 35px;
+}
+
+section h2{
+    font-size: 1.8em;
+    color: #007BFF;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 5px;
+}
+
+.card{
+    border-left: 4px solid #007BFF;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+.card h3 {
+    color: #007BFF;
+    margin-bottom: 8px;
+}
+
+.card strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
