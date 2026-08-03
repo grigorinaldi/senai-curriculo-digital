@@ -1,10 +1,15 @@
 <?php
 require_once "crud.php";
 
-$dados = read($pdo, "dados_pessoais");
-$contato = readAll($pdo, "contatos");
-$experiencias = readAll($pdo, "experiencias");
-$formacoes = readAll($pdo, "formacao");
+$idPessoa = 1;
+
+$dados = read($pdo, "dados_pessoais", "*", "id = $idPessoa");
+
+$contato = read($pdo, "contatos", "*", "dados_pessoais_id = $idPessoa");
+
+$experiencias = readAll($pdo, "experiencias", "dados_pessoais_id = $idPessoa");
+
+$formacoes = readAll($pdo, "formacao", "dados_pessoais_id = $idPessoa");
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +19,7 @@ $formacoes = readAll($pdo, "formacao");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Currículo</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -28,35 +34,47 @@ $formacoes = readAll($pdo, "formacao");
         <div class="conteudo">
             <section>
 
-
-            <h2>Contato</h2>
+                <h2>Contato</h2>
                 <div class="contato">
                     <p>
                         <strong>E-mail: </strong>
-            <p>Email: <?= $contato["email"] ?? "Não informado" ?></p>
-            <p>Telefone: <?= $contato["telefone"] ?? "Não informado" ?></p>
-            <p>Perfis: <?= $contato["perfis_profissionais"] ?? "Não informado" ?></p>
+                        <?= htmlspecialchars($contato["email"] ?? "Não informado") ?>
+                    </p>
+                    <p>
+                        <strong>Telefone: </strong>
+                        <?= htmlspecialchars($contato["telefone"] ?? "Não informado") ?>
+                    </p>
+                    <p>
+                        <strong>Perfis Profissionais: </strong>
+                        <?= htmlspecialchars($contato["perfis_profissionais"] ?? "Não informado") ?>
+                    </p>
+                </div>
+            </section>
 
-            <h2>Experiência Profissional</h2>
+            <section>
+                <h2>Experiência Profissional</h2>
 
-            <?php foreach ($experiencias as $exp): ?>
-                <h3><?= $exp["empresa"] ?></h3>
-                <strong><?= $exp["funcao"] ?></strong>
-                <p><?= $exp["periodo"] ?></p>
-                <p><?= $exp["descricao"] ?></p>
+                <?php foreach ($experiencias as $exp): ?>
+                    <h3><?= $exp["empresa"] ?></h3>
+                    <strong><?= $exp["funcao"] ?></strong>
+                    <p><?= $exp["periodo"] ?></p>
+                    <p><?= $exp["descricao"] ?></p>
 
-                <hr>
+                    <hr>
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
-            <h2>Formação</h2>
+                <h2>Formação</h2>
 
-            <?php foreach ($formacoes as $formacao): ?>
+                <?php foreach ($formacoes as $formacao): ?>
 
-                <h3><?= $formacao["curso"] ?></h3>
-                <p><?= $formacao["instituicao"] ?></p>
-                <p><?= $formacao["periodo"] ?></p>
-            <?php endforeach; ?>
+                    <h3><?= $formacao["curso"] ?></h3>
+                    <p><?= $formacao["instituicao"] ?></p>
+                    <p><?= $formacao["periodo"] ?></p>
+                <?php endforeach; ?>
+            </section>
+        </div>
+    </main>
 
 </body>
 
