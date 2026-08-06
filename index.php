@@ -1,15 +1,39 @@
 <?php
 require_once "crud.php";
 
-$idPessoa = 1;
+$candidatos = readAll($pdo, "dados_pessoais");
 
-$dados = read($pdo, "dados_pessoais", "*", "id = $idPessoa");
+$idPessoa = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
-$contato = read($pdo, "contatos", "*", "dados_pessoais_id = $idPessoa");
+if (!$idPessoa && !empty($candidatos)) {
+    $idPessoa = $candidatos[0]["id"];
+}
 
-$experiencias = readAll($pdo, "experiencias", "dados_pessoais_id = $idPessoa");
+$dados = read(
+    $pdo,
+    "dados_pessoais",
+    "*",
+    "id = " . (int) $idPessoa
+);
 
-$formacoes = readAll($pdo, "formacao", "dados_pessoais_id = $idPessoa");
+$contato = read(
+    $pdo,
+    "contatos",
+    "*",
+    "dados_pessoais_id = " . (int) $idPessoa
+);
+
+$experiencias = readAll(
+    $pdo,
+    "experiencias",
+    "dados_pessoais_id = " . (int) $idPessoa
+);
+
+$formacoes = readAll(
+    $pdo,
+    "formacao",
+    "dados_pessoais_id = " . (int) $idPessoa
+);
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +48,28 @@ $formacoes = readAll($pdo, "formacao", "dados_pessoais_id = $idPessoa");
 
 <body>
     <main class="curriculo">
+
+        <form method="GET" action="index.php">
+
+            <label for="id">
+                <strong>Selecionar candidato:</strong>
+            </label>
+
+            <select name="id" id="id" required>
+
+                <?php foreach ($candidatos as $candidato): ?>
+
+                    <option value="<?= $candidato["id"] ?>" <?= $candidato["id"] == $idPessoa ? "selected" : "" ?>>
+                        <?= htmlspecialchars($candidato["nome"]) ?>
+                    </option>
+
+                <?php endforeach; ?>
+
+            </select>
+
+            <button type="submit">Visualizar currículo</button>
+
+        </form>
         <header class="cabecalho">
             <h1><?= $dados["nome"] ?></h1>
             <h2><?= $dados["cargo"] ?></h2>
