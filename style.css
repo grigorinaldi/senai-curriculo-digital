@@ -13,12 +13,13 @@ body {
 }
 
 .curriculo {
-    max-width: 900px;
+    max-width: 1300px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    
 }
 
 .cabeçalho {
@@ -71,4 +72,33 @@ section h2{
     display: block;
     margin-bottom: 5px;
     color: #555;
+}
+
+.formulario-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, textarea, select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #007BFF;
 }
